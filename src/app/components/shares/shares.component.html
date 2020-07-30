@@ -42,7 +42,7 @@
                 &pound;{{t.value}}
               </td>
 
-              <td class="text-right text-success" [ngClass]="{'text-danger' : t.type==='withdrawl'||t.type==='buy'}">
+              <td class="text-right text-success" [ngClass]="{'text-danger' : t.type===tTransType.withdrawl||t.type===tTransType.buy}">
                 <span *ngIf="t.cashflow>=0;else negative">
                   +&pound;{{t.cashflow|number}}
                 </span>

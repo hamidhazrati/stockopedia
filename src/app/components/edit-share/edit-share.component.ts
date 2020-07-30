@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { ActivatedRoute } from '@angular/router';
-import { AstMemoryEfficientTransformer } from '@angular/compiler';
+
+export enum TransType {
+  buy="buy",
+  sell="sell",
+  deposit="deposit",
+  withdrawal="withdrawl"
+}
 
 export interface Transaction {
   cashflow: number
@@ -9,9 +15,10 @@ export interface Transaction {
   id: number
   security: string
   shares: number
-  type: string
+  type: TransType
   value: number
 }
+
 @Component({
   selector: 'app-edit-share',
   templateUrl: './edit-share.component.html',
@@ -22,6 +29,7 @@ export class EditShareComponent implements OnInit {
   id: number;
 
   transaction: Transaction ;
+  tTransType = TransType;
 
   constructor(
     private dataService: DataService,

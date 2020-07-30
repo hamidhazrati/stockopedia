@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
-import { tap } from 'rxjs/operators';
+import { TransType } from '../edit-share/edit-share.component';
 
 @Component({
   selector: 'app-shares',
@@ -11,6 +11,7 @@ export class SharesComponent implements OnInit, AfterContentChecked {
   totalCashFlow: number;
   transactionDeleted = false;
   shares: Object;
+  tTransType = TransType;
 
   constructor(private dataSerive: DataService) { }
 
