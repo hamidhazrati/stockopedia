@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="card mt-4">
+    <div class="card-body">
+      <h3>Edit transaction</h3>
+      <form action="/">
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input type="date" class="form-control" id="date"
+          value="{{transaction.date| slice:0:10}}"
+          >
+        </div>
+        <div class="form-group">
+          <label for="type">Type</label>
+
+          <select id="type" class="form-control">
+            <option disabled selected>Please select...</option>
+            <option [selected]="transaction.type==='deposit'">Deposit</option>
+            <option [selected]="transaction.type==='withdrawal'">Withdraw</option>
+            <option [selected]="transaction.type==='buy'">Buy</option>
+            <option [selected]="transaction.type==='sell'">Sell</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="security">Security</label>
+          <input type="text" class="form-control" id="security"  value="{{transaction.security}}">
+        </div>
+        <div class="form-group">
+          <label for="shares">Shares</label>
+          <input type="number" class="form-control" id="shares" value="{{transaction.shares}}">
+        </div>
+        <div class="form-group">
+          <label for="value">Value</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">&pound;</span>
+            </div>
+            <input type="number" class="form-control" id="value" value="{{transaction.value}}">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Update transaction</button>
+      </form>
+    </div>
+  </div>
+</div>

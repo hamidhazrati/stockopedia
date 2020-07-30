@@ -1,0 +1,83 @@
+<div class="container">
+
+  <div class="card mt-4">
+
+    <div class="card-body">
+
+      <div *ngIf="this.transactionAdded" class="alert alert-success" role="alert">Transaction added!</div>
+
+      <div *ngIf="this.transactionUpdated" class="alert alert-primary" role="alert">Transaction updated!</div>
+
+      <div *ngIf="this.transactionDeleted" class="alert alert-danger" role="alert">Transaction deleted!</div>
+
+      <div *ngIf="shares|async as s; else loading">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Date</th>
+              <th scope="col">Type</th>
+              <th scope="col">Security</th>
+              <th scope="col" class="text-right">Shares</th>
+              <th scope="col" class="text-right">Value</th>
+              <th scope="col" class="text-right">Cashflow</th>
+              <th scope="col" class="text-right">&nbsp;</th>
+              <th scope="col" class="text-right">&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let t of s.transactions">
+
+              <th scope="row">{{t.id}}</th>
+
+              <td>{{t.date|date : "dd/MM/y"}}</td>
+
+              <td>{{t.type| titlecase}}</td>
+
+              <td><span class="text-muted">{{t.security || 'n/a'}}</span></td>
+
+              <td class="text-right"><span class="text-muted">{{t.shares || 'n/a'}}</span></td>
+
+              <td class="text-right">
+                &pound;{{t.value}}
+              </td>
+
+              <td class="text-right text-success" [ngClass]="{'text-danger' : t.type==='withdrawl'||t.type==='buy'}">
+                <span *ngIf="t.cashflow>=0;else negative">
+                  +&pound;{{t.cashflow|number}}
+                </span>
+                <ng-template #negative>
+                  -&pound;{{t.cashflow*-1|number}}
+                </ng-template>
+              </td>
+
+              <td class="text-right"><a routerLink="/edit/{{t.id}}">Edit</a></td>
+
+              <td class="text-right"><a href="javascript:void(0)" (click)="this.deleteTransaction(t.id,s)">Delete</a>
+              </td>
+
+            </tr>
+          </tbody>
+
+          <tfoot>
+            <tr>
+              <td colspan="6">Cumulative cashflow</td>
+              <td class="text-right">&pound;{{this.totalCashFlow|number}}</td>
+              <td colspan="2">&nbsp;</td>
+            </tr>
+          </tfoot>
+
+        </table>
+
+      </div>
+
+      <ng-template #loading>
+        Loading transaction
+        <br>
+        Please wait ...
+      </ng-template>
+
+
+    </div>
+  </div>
+</div>Ï
